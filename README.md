@@ -99,7 +99,7 @@ hydra -l gordonb -P /usr/share/wordlists/rockyou.txt 10.0.0.1 -s 5000 http-get-f
 
 **Note:** Use the same `PHPSESSID` cookie retrieved from `http://10.0.0.1:5000/dvwa/login.php` (via the WAF). The correct password for gordonb is `abc123`, which appears at position 10 in RockYou.
 
-**Expected result:** Account locked after 5 failed attempts. `abc123` at attempt 10 is blocked by the WAF lockout — Hydra finds **0 valid credentials**. Dashboard shows 1 Lockout Event and 8 Failed Logins.
+**Expected result:** Account locked after 5 failed attempts. `abc123` at attempt 10 is blocked by the WAF lockout — Hydra finds **0 valid credentials**. Dashboard shows 1 Lockout Event.
 
 ---
 
