@@ -1,134 +1,31 @@
-[2026-04-05 21:34:50] [INFO] WAF proxy starting on 0.0.0.0:5000 -> http://10.0.0.2
-[2026-04-05 21:34:50] [INFO] Config: lockout=5/60s | rate_limit=20/30s | dedup=2.0s
-[2026-04-05 21:34:50] [INFO] Dashboard: http://10.0.0.1:5000/waf/dashboard
-[2026-04-05 21:35:01] [INFO] LOGIN_OK username=admin ip=ip-f5047344122f
-[2026-04-05 21:35:08] [ALERT] SQLI_BLOCKED ip=ip-f5047344122f path=/dvwa/vulnerabilities/sqli/ payload="id=1' OR '1'='1"
-[2026-04-05 21:36:05] [ALERT] SQLI_BLOCKED ip=ip-f5047344122f path=/dvwa/vulnerabilities/sqli/ payload="id=1' UNION SELECT user, password FROM users #"
-[2026-04-05 23:04:41] [INFO] WAF state reset via dashboard
-[2026-04-05 23:04:55] [INFO] LOGIN_OK username=admin ip=ip-f5047344122f
-[2026-04-05 23:05:10] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=1/5
-[2026-04-05 23:05:22] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=2/5
-[2026-04-05 23:05:34] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=3/5
-[2026-04-05 23:05:48] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=4/5
-[2026-04-05 23:06:01] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=5/5
-[2026-04-05 23:06:13] [ALERT] ACCOUNT_LOCKED username=gordonb ip=ip-f5047344122f duration=60s
-[2026-04-05 23:07:20] [WARN] LOGIN_BLOCKED username=gordonb ip=ip-f5047344122f remaining=32s
-[2026-04-05 23:08:15] [INFO] WAF state reset via dashboard
-[2026-04-05 23:08:28] [INFO] LOGIN_OK username=admin ip=ip-f5047344122f
-[2026-04-05 23:08:40] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=1/5
-[2026-04-05 23:08:52] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=2/5
-[2026-04-05 23:09:04] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=3/5
-[2026-04-05 23:09:14] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=4/5
-[2026-04-05 23:09:20] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=5/5
-[2026-04-05 23:09:26] [ALERT] ACCOUNT_LOCKED username=gordonb ip=ip-f5047344122f duration=60s
-[2026-04-05 23:10:40] [INFO] WAF state reset via dashboard
-[2026-04-05 23:14:05] [INFO] LOGIN_OK username=admin ip=ip-f5047344122f
-[2026-04-05 23:14:18] [WARN] LOGIN_FAIL username=1337 ip=ip-f5047344122f attempt=1/5
-[2026-04-05 23:14:31] [WARN] LOGIN_FAIL username=1337 ip=ip-f5047344122f attempt=2/5
-[2026-04-05 23:14:45] [WARN] LOGIN_FAIL username=1337 ip=ip-f5047344122f attempt=3/5
-[2026-04-05 23:14:58] [WARN] LOGIN_FAIL username=1337 ip=ip-f5047344122f attempt=4/5
-[2026-04-05 23:15:11] [WARN] LOGIN_FAIL username=1337 ip=ip-f5047344122f attempt=5/5
-[2026-04-05 23:15:27] [ALERT] ACCOUNT_LOCKED username=1337 ip=ip-f5047344122f duration=60s
-[2026-04-05 23:16:50] [INFO] WAF state reset via dashboard
-[2026-04-05 23:17:02] [WARN] LOGIN_FAIL username=1337 ip=ip-f5047344122f attempt=1/5
-[2026-04-05 23:17:14] [WARN] LOGIN_FAIL username=1337 ip=ip-f5047344122f attempt=2/5
-[2026-04-05 23:17:27] [WARN] LOGIN_FAIL username=1337 ip=ip-f5047344122f attempt=3/5
-[2026-04-05 23:17:40] [WARN] LOGIN_FAIL username=1337 ip=ip-f5047344122f attempt=4/5
-[2026-04-05 23:17:53] [WARN] LOGIN_FAIL username=1337 ip=ip-f5047344122f attempt=5/5
-[2026-04-05 23:18:04] [ALERT] ACCOUNT_LOCKED username=1337 ip=ip-f5047344122f duration=60s
-[2026-04-05 23:19:20] [INFO] WAF state reset via dashboard
-[2026-04-05 23:19:35] [INFO] LOGIN_OK username=admin ip=ip-f5047344122f
-[2026-04-05 23:22:01] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=1/5
-[2026-04-05 23:22:13] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=2/5
-[2026-04-05 23:22:25] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=3/5
-[2026-04-05 23:22:38] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=4/5
-[2026-04-05 23:22:51] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=5/5
-[2026-04-05 23:23:02] [ALERT] ACCOUNT_LOCKED username=gordonb ip=ip-f5047344122f duration=60s
-[2026-04-05 23:24:10] [INFO] WAF state reset via dashboard
-[2026-04-05 23:24:22] [INFO] LOGIN_OK username=admin ip=ip-f5047344122f
-[2026-04-05 23:25:15] [ALERT] SQLI_BLOCKED ip=ip-f5047344122f path=/dvwa/vulnerabilities/sqli/ payload="id=1' OR '1'='1"
-[2026-04-05 23:25:27] [ALERT] SQLI_BLOCKED ip=ip-f5047344122f path=/dvwa/vulnerabilities/sqli/ payload="id=1' UNION SELECT user, password FROM users #"
-[2026-04-05 23:27:44] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=1/5
-[2026-04-05 23:27:56] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=2/5
-[2026-04-05 23:28:08] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=3/5
-[2026-04-05 23:28:21] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=4/5
-[2026-04-05 23:28:34] [WARN] RATE_LIMITED ip=ip-f5047344122f path=/dvwa/vulnerabilities/brute/
-[2026-04-05 23:28:47] [WARN] RATE_LIMITED ip=ip-f5047344122f path=/dvwa/vulnerabilities/brute/
-[2026-04-05 23:29:09] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=5/5
-[2026-04-05 23:29:21] [ALERT] ACCOUNT_LOCKED username=gordonb ip=ip-f5047344122f duration=60s
-[2026-04-05 23:30:35] [INFO] WAF state reset via dashboard
-[2026-04-06 00:11:02] [INFO] WAF proxy starting on 0.0.0.0:5000 -> http://10.0.0.2
-[2026-04-06 00:11:02] [INFO] Config: lockout=5/60s | rate_limit=20/30s | dedup=2.0s
-[2026-04-06 00:11:02] [INFO] Dashboard: http://10.0.0.1:5000/waf/dashboard
-[2026-04-06 00:11:18] [INFO] LOGIN_OK username=admin ip=ip-f5047344122f
-[2026-04-06 00:12:03] [ALERT] SQLI_BLOCKED ip=ip-f5047344122f path=/dvwa/vulnerabilities/sqli/ payload="id=1' UNION SELECT user, password FROM users #"
-[2026-04-06 00:12:31] [WARN] LOGIN_FAIL username=admin ip=ip-f5047344122f attempt=1/5
-[2026-04-06 00:12:44] [WARN] LOGIN_FAIL username=admin ip=ip-f5047344122f attempt=2/5
-[2026-04-06 00:12:57] [WARN] LOGIN_FAIL username=admin ip=ip-f5047344122f attempt=3/5
-[2026-04-06 00:13:09] [WARN] LOGIN_FAIL username=admin ip=ip-f5047344122f attempt=4/5
-[2026-04-06 00:13:09] [WARN] LOGIN_FAIL username=admin ip=ip-f5047344122f attempt=5/5
-[2026-04-06 00:13:13] [ALERT] ACCOUNT_LOCKED username=admin ip=ip-f5047344122f duration=60s
-[2026-04-06 00:14:28] [INFO] WAF state reset via dashboard
-[2026-04-06 14:50:05] [INFO] WAF proxy starting on 0.0.0.0:5000 -> http://10.0.0.2
-[2026-04-06 14:50:05] [INFO] Config: lockout=5/60s | rate_limit=20/30s | dedup=2.0s
-[2026-04-06 14:50:05] [INFO] Dashboard: http://10.0.0.1:5000/waf/dashboard
-[2026-04-06 14:50:22] [INFO] LOGIN_OK username=admin ip=ip-f5047344122f
-[2026-04-06 14:51:08] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=1/5
-[2026-04-06 14:51:21] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=2/5
-[2026-04-06 14:51:34] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=3/5
-[2026-04-06 14:51:47] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=4/5
-[2026-04-06 14:52:00] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=5/5
-[2026-04-06 14:52:10] [ALERT] ACCOUNT_LOCKED username=gordonb ip=ip-f5047344122f duration=60s
-[2026-04-06 14:53:18] [WARN] LOGIN_BLOCKED username=gordonb ip=ip-f5047344122f remaining=12s
-[2026-04-06 14:53:45] [INFO] WAF state reset via dashboard
-[2026-04-06 14:53:58] [INFO] LOGIN_OK username=admin ip=ip-f5047344122f
-[2026-04-06 14:54:19] [ALERT] SQLI_BLOCKED ip=ip-f5047344122f path=/dvwa/vulnerabilities/sqli/ payload="id=1' OR '1'='1"
-[2026-04-06 14:54:36] [ALERT] SQLI_BLOCKED ip=ip-f5047344122f path=/dvwa/vulnerabilities/sqli/ payload="id=1' UNION SELECT user, password FROM users #"
-[2026-04-06 14:55:10] [INFO] WAF state reset via dashboard
-[2026-04-06 22:37:12] [INFO] WAF proxy starting on 0.0.0.0:5000 -> http://10.0.0.2
-[2026-04-06 22:37:12] [INFO] Config: lockout=5/60s | rate_limit=20/30s | dedup=2.0s
-[2026-04-06 22:37:12] [INFO] Dashboard: http://10.0.0.1:5000/waf/dashboard
-[2026-04-06 22:37:30] [INFO] LOGIN_OK username=admin ip=ip-f5047344122f
-[2026-04-06 22:38:01] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=1/5
-[2026-04-06 22:38:14] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=2/5
-[2026-04-06 22:38:27] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=3/5
-[2026-04-06 22:38:40] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=4/5
-[2026-04-06 22:38:53] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=5/5
-[2026-04-06 22:39:46] [ALERT] ACCOUNT_LOCKED username=gordonb ip=ip-f5047344122f duration=60s
-[2026-04-06 22:40:50] [INFO] WAF state reset via dashboard
-[2026-04-06 22:41:03] [INFO] LOGIN_OK username=admin ip=ip-f5047344122f
-[2026-04-06 22:41:15] [WARN] LOGIN_FAIL username=admin ip=ip-f5047344122f attempt=1/5
-[2026-04-06 22:41:28] [WARN] LOGIN_FAIL username=admin ip=ip-f5047344122f attempt=2/5
-[2026-04-06 22:41:41] [WARN] LOGIN_FAIL username=admin ip=ip-f5047344122f attempt=3/5
-[2026-04-06 22:41:54] [WARN] LOGIN_FAIL username=admin ip=ip-f5047344122f attempt=4/5
-[2026-04-06 22:42:01] [WARN] LOGIN_FAIL username=admin ip=ip-f5047344122f attempt=5/5
-[2026-04-06 22:42:04] [ALERT] ACCOUNT_LOCKED username=admin ip=ip-f5047344122f duration=60s
-[2026-04-06 22:42:20] [INFO] WAF state reset via dashboard
-[2026-04-06 22:42:33] [INFO] LOGIN_OK username=admin ip=ip-f5047344122f
-[2026-04-06 22:42:45] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=1/5
-[2026-04-06 22:42:58] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=2/5
-[2026-04-06 22:43:06] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=3/5
-[2026-04-06 22:43:12] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=4/5
-[2026-04-06 22:43:18] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=5/5
-[2026-04-06 22:43:22] [ALERT] ACCOUNT_LOCKED username=gordonb ip=ip-f5047344122f duration=60s
-[2026-04-06 22:44:30] [INFO] WAF state reset via dashboard
-[2026-04-06 22:44:45] [INFO] LOGIN_OK username=admin ip=ip-f5047344122f
+[2026-04-06 22:40:21] [INFO] WAF proxy starting — listening on 0.0.0.0:5000 → forwarding to http://10.0.0.2
+[2026-04-06 22:40:21] [INFO] Config: lockout=5 failures/60s | rate_limit=20 req/30s
+[2026-04-06 22:40:21] [INFO] Dashboard: http://10.0.0.1:5000/waf/dashboard
+[2026-04-06 22:46:13] [INFO] WAF state reset via dashboard
 [2026-04-06 22:47:14] [ALERT] SQLI_BLOCKED ip=ip-f5047344122f path=/dvwa/vulnerabilities/sqli/ payload="id=1' OR '1'='1"
 [2026-04-06 22:47:58] [ALERT] SQLI_BLOCKED ip=ip-f5047344122f path=/dvwa/vulnerabilities/sqli/ payload="id=1' UNION SELECT user, password FROM users #"
-[2026-04-06 22:49:02] [INFO] LOGIN_OK username=admin ip=ip-f5047344122f
-[2026-04-06 22:49:25] [INFO] WAF state reset via dashboard
-[2026-04-06 22:50:43] [INFO] LOGIN_OK username=admin ip=ip-f5047344122f
-[2026-04-06 22:50:43] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=1/5
-[2026-04-06 22:50:43] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=2/5
-[2026-04-06 22:50:44] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=3/5
-[2026-04-06 22:50:44] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=4/5
-[2026-04-06 22:50:44] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=5/5
+[2026-04-06 22:49:25] [WARN] LOGIN_FAIL username=admin ip=ip-f5047344122f attempt=1/5
+[2026-04-06 22:49:25] [WARN] LOGIN_FAIL username=admin ip=ip-f5047344122f attempt=2/5
+[2026-04-06 22:49:25] [WARN] LOGIN_FAIL username=admin ip=ip-f5047344122f attempt=3/5
+[2026-04-06 22:49:25] [INFO] LOGIN_OK username=admin ip=ip-f5047344122f
+[2026-04-06 22:50:44] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=1/5
+[2026-04-06 22:50:44] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=2/5
+[2026-04-06 22:50:45] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=3/5
+[2026-04-06 22:50:45] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=4/5
+[2026-04-06 22:50:45] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=5/5
 [2026-04-06 22:50:45] [ALERT] ACCOUNT_LOCKED username=gordonb ip=ip-f5047344122f duration=60s
+[2026-04-06 22:50:45] [WARN] LOGIN_BLOCKED username=gordonb ip=ip-f5047344122f remaining=59s
+[2026-04-06 22:50:45] [WARN] LOGIN_BLOCKED username=gordonb ip=ip-f5047344122f remaining=59s
+[2026-04-06 22:50:46] [WARN] LOGIN_BLOCKED username=gordonb ip=ip-f5047344122f remaining=59s
+[2026-04-06 22:50:46] [WARN] LOGIN_BLOCKED username=gordonb ip=ip-f5047344122f remaining=59s
+[2026-04-06 22:50:46] [WARN] LOGIN_BLOCKED username=gordonb ip=ip-f5047344122f remaining=58s
 [2026-04-06 22:50:46] [WARN] RATE_LIMITED ip=ip-f5047344122f path=/dvwa/vulnerabilities/brute/
 [2026-04-06 22:50:46] [WARN] RATE_LIMITED ip=ip-f5047344122f path=/dvwa/vulnerabilities/brute/
+[2026-04-06 22:50:46] [WARN] RATE_LIMITED ip=ip-f5047344122f path=/dvwa/vulnerabilities/brute/
 [2026-04-06 22:50:47] [WARN] RATE_LIMITED ip=ip-f5047344122f path=/dvwa/vulnerabilities/brute/
 [2026-04-06 22:50:47] [WARN] RATE_LIMITED ip=ip-f5047344122f path=/dvwa/vulnerabilities/brute/
 [2026-04-06 22:50:47] [WARN] RATE_LIMITED ip=ip-f5047344122f path=/dvwa/vulnerabilities/brute/
 [2026-04-06 22:50:47] [WARN] RATE_LIMITED ip=ip-f5047344122f path=/dvwa/vulnerabilities/brute/
-[2026-04-06 22:50:47] [WARN] RATE_LIMITED ip=ip-f5047344122f path=/dvwa/vulnerabilities/brute/
-[2026-04-06 22:50:47] [WARN] LOGIN_BLOCKED username=gordonb ip=ip-f5047344122f remaining=58s
+[2026-04-06 23:01:19] [INFO] WAF proxy starting on 0.0.0.0:5000 -> http://10.0.0.2
+[2026-04-06 23:01:19] [INFO] Config: lockout=5/60s | rate_limit=20/30s | dedup=2.0s
+[2026-04-06 23:01:19] [INFO] Dashboard: http://10.0.0.1:5000/waf/dashboard
