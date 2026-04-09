@@ -8,6 +8,37 @@ This repository contains all code, data, and setup documentation for **CW1** (Th
 
 ---
 
+## Repository Structure
+
+```
+├── waf_proxy.py              # CW2 — Flask WAF reverse proxy (runs on Kali)
+├── requirement.txt           # Python dependencies (Flask, requests)
+├── data/
+│   └── waf_audit.log         # Sample WAF audit log from the defence demo
+├── figures/                  # Screenshots from CW1 and CW2 lab runs
+│   ├── nmap_scan.png         # Nmap service/version scan output
+│   ├── boo_sql_dvwa.png      # Boolean SQLi result in DVWA
+│   ├── union_sql_dvwa.png    # UNION SQLi credential dump in DVWA
+│   ├── brute_force_admin.png # Hydra brute force result (CW1, admin)
+│   ├── brute_force_login.png # DVWA login after brute force (CW1)
+│   ├── password_cracking.png # MD5 hash cracked via CrackStation
+│   ├── 403_boo_sql.png       # WAF blocking boolean SQLi (403 response)
+│   ├── 403_union_sql.png     # WAF blocking UNION SQLi (403 response)
+│   ├── dashboard_boo_sql.png     # Dashboard: SQLi blocked event (boolean)
+│   ├── dashboard_union_sql.png   # Dashboard: SQLi blocked event (UNION)
+│   ├── dashboard_brute_admin.png # Dashboard: admin lockout event
+│   ├── dashboard_brute_gordonb.png # Dashboard: gordonb lockout event
+│   ├── live_dashboard.png    # Live WAF security dashboard overview
+│   ├── waf_audit_log.png     # WAF audit log grep output
+│   ├── waf_brute_admin.png   # Hydra against WAF (admin, CW2)
+│   └── waf_brute_gordonb.png # Hydra against WAF (gordonb, CW2 — 0 found)
+└── setup/
+    ├── lab_setup_commands.sh # Full step-by-step terminal commands
+    └── setup_notes.md        # Important notes on VM configuration
+```
+
+---
+
 ## Lab Environment
 
 | Machine | OS | IP | Role |
@@ -28,9 +59,11 @@ nmap -sV -sC -p 80 10.0.0.2
 ```
 **Finding:** Port 80 open, running Apache httpd 2.4.58 (Ubuntu). Server broadcasts its exact version in HTTP response headers — an information disclosure vulnerability (CWE-200) that enables targeted CVE lookups.
 
+**Screenshot:** `figures/nmap_scan.png`
+
 ---
 
-### 2. SQL Injection — Manual (DVWA) + Automated (Python)
+### 2. SQL Injection — Manual (DVWA)
 **Target:** `http://10.0.0.2/dvwa/vulnerabilities/sqli/`
 **Vulnerability:** CWE-89 | OWASP A03:2021 — Injection
 
@@ -45,6 +78,8 @@ nmap -sV -sC -p 80 10.0.0.2
 ```
 
 **Result:** All 5 employee usernames and MD5 password hashes exfiltrated. Hash `5f4dcc3b5aa765d61d8327deb882cf99` cracked instantly via CrackStation to `password`.
+
+**Screenshots:** `figures/boo_sql_dvwa.png`, `figures/union_sql_dvwa.png`, `figures/password_cracking.png`
 
 
 ### 3. Brute Force — Hydra
@@ -61,6 +96,8 @@ hydra -l admin -P /usr/share/wordlists/rockyou.txt 10.0.0.2 http-get-form "/dvwa
 
 **Result:** Valid admin credential recovered — `password` — found at attempt 4 of 14,344,399. No rate limiting or account lockout was triggered.
 
+**Screenshots:** `figures/brute_force_admin.png`, `figures/brute_force_login.png`
+
 ---
 
 ## CW2 — Flask WAF Reverse Proxy Defence
@@ -73,6 +110,11 @@ Attacker / Hydra  →  WAF (10.0.0.1:5000)  →  DVWA (10.0.0.2)
 ```
 
 **Dashboard:** `http://10.0.0.1:5000/waf/dashboard`
+
+**Install dependencies (run on Kali):**
+```bash
+pip install -r requirement.txt --break-system-packages
+```
 
 **Start the WAF (run on Kali):**
 ```bash
@@ -101,11 +143,15 @@ hydra -l gordonb -P /usr/share/wordlists/rockyou.txt 10.0.0.1 -s 5000 http-get-f
 
 **Expected result:** Account locked after 5 failed attempts. `abc123` at attempt 10 is blocked by the WAF lockout — Hydra finds **0 valid credentials**. Dashboard shows 1 Lockout Event.
 
+**Screenshots:** `figures/waf_brute_gordonb.png`, `figures/dashboard_brute_gordonb.png`, `figures/live_dashboard.png`, `figures/waf_audit_log.png`
+
 ---
 
 ## How to Replicate
 
 See `setup/lab_setup_commands.sh` for the complete step-by-step terminal commands to build the lab from scratch, including VM network configuration, DVWA installation, WAF deployment, and all attack commands.
+
+Read `setup/setup_notes.md` first — it covers common gotchas such as interface name differences, DVWA prerequisite checks, and manual steps that cannot be scripted.
 
 ---
 

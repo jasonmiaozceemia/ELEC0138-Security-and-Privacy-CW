@@ -112,7 +112,7 @@ hydra -l admin -P /usr/share/wordlists/rockyou.txt 10.0.0.2 http-get-form "/dvwa
 # ────────────────────────────────────────────────────────────
 
 # 4.1 Install Python dependencies for the WAF proxy
-pip install flask requests --break-system-packages
+pip install -r requirement.txt --break-system-packages
 
 # 4.2 Copy waf_proxy.py to Kali home directory (if not already there)
 # The file is in the repo root — adjust path as needed
