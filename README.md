@@ -8,37 +8,6 @@ This repository contains all code, data, and setup documentation for **CW1** (Th
 
 ---
 
-## Repository Structure
-
-```
-├── waf_proxy.py              # CW2 — Flask WAF reverse proxy (runs on Kali)
-├── requirement.txt           # Python dependencies (Flask, requests, cryptography)
-├── data/
-│   └── waf_audit.log         # Sample WAF audit log from the defence demo
-├── figures/                  # Screenshots from CW1 and CW2 lab runs
-│   ├── nmap_scan.png         # Nmap service/version scan output
-│   ├── boo_sql_dvwa.png      # Boolean SQLi result in DVWA
-│   ├── union_sql_dvwa.png    # UNION SQLi credential dump in DVWA
-│   ├── brute_force_admin.png # Hydra brute force result (CW1, admin)
-│   ├── brute_force_login.png # DVWA login after brute force (CW1)
-│   ├── password_cracking.png # MD5 hash cracked via CrackStation
-│   ├── 403_boo_sql.png       # WAF blocking boolean SQLi (403 response)
-│   ├── 403_union_sql.png     # WAF blocking UNION SQLi (403 response)
-│   ├── dashboard_boo_sql.png     # Dashboard: SQLi blocked event (boolean)
-│   ├── dashboard_union_sql.png   # Dashboard: SQLi blocked event (UNION)
-│   ├── dashboard_brute_admin.png # Dashboard: admin lockout event
-│   ├── dashboard_brute_gordonb.png # Dashboard: gordonb lockout event
-│   ├── live_dashboard.png    # Live WAF security dashboard overview
-│   ├── waf_audit_log.png     # WAF audit log grep output
-│   ├── waf_brute_admin.png   # Hydra against WAF (admin, CW2)
-│   └── waf_brute_gordonb.png # Hydra against WAF (gordonb, CW2 — 0 found)
-└── setup/
-    ├── lab_setup_commands.sh # Full step-by-step terminal commands
-    └── setup_notes.md        # Important notes on VM configuration
-```
-
----
-
 ## Lab Environment
 
 | Machine | OS | IP | Role |
