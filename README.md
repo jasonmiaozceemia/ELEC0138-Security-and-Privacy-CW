@@ -88,16 +88,33 @@ The WAF (`waf_proxy.py`) runs on the Kali machine at port 5000 and sits between 
 Attacker / Hydra  →  WAF (10.0.0.1:5000)  →  DVWA (10.0.0.2)
 ```
 
-**Dashboard:** `http://10.0.0.1:5000/waf/dashboard`
+**Port reference:**
+
+| Mode | Setting | Port | Protocol | URL prefix |
+|---|---|---|---|---|
+| Default (HTTP) | `USE_TLS = False` | 5000 | HTTP | `http://10.0.0.1:5000/...` |
+| TLS mode | `USE_TLS = True` | 5443 | HTTPS | `https://10.0.0.1:5443/...` |
+
+The lab demo uses **HTTP / port 5000** by default. Switch to TLS mode only when demonstrating Layer 7.
+
+**Dashboard:** `http://10.0.0.1:5000/waf/dashboard` *(or `https://10.0.0.1:5443/waf/dashboard` in TLS mode)*
 
 **Install dependencies (run on Kali):**
 ```bash
 pip install -r requirement.txt --break-system-packages
 ```
 
-**Start the WAF (run on Kali):**
+**Start the WAF — default HTTP mode (run on Kali):**
 ```bash
 python3 waf_proxy.py
+# Listens on http://10.0.0.1:5000
+```
+
+**Start the WAF — HTTPS/TLS mode (Layer 7):**
+```bash
+# 1. Set USE_TLS = True in waf_proxy.py
+python3 waf_proxy.py
+# Listens on https://10.0.0.1:5443  (accept the self-signed cert warning in browser)
 ```
 
 **Read encrypted audit log (Layer 6):**
@@ -105,10 +122,9 @@ python3 waf_proxy.py
 python3 waf_proxy.py --decrypt
 ```
 
-**Enable HTTPS/TLS mode (Layer 7):**
-Set `USE_TLS = True` in `waf_proxy.py`, then access via `https://10.0.0.1:5443`.
-
 ### Brute Force — Hydra against WAF (CW2 defence demo)
+
+> **Note:** Run this demo in default HTTP mode (`USE_TLS = False`, port 5000). Hydra does not support self-signed HTTPS certs without extra flags, so keep TLS off for the brute force demo.
 
 **Target:** `http://10.0.0.1:5000/dvwa/vulnerabilities/brute/` (traffic intercepted by WAF)
 
@@ -120,13 +136,13 @@ hydra -l gordonb -P /usr/share/wordlists/rockyou.txt 10.0.0.1 -s 5000 http-get-f
 **Flags explained:**
 | Flag | Purpose |
 |---|---|
-| `10.0.0.1 -s 5000` | Target the WAF proxy instead of DVWA directly |
+| `10.0.0.1 -s 5000` | Target the WAF proxy on HTTP port 5000 (not DVWA directly) |
 | `-t 1` | Single thread — required so lockout triggers sequentially |
 | `-V` | Verbose — print every attempt |
 | `-f` | Stop on first valid credential found |
 | `F=Username and/or password incorrect.` | Treat any response containing this string as a failed attempt |
 
-**Note:** Use the same `PHPSESSID` cookie retrieved from `http://10.0.0.1:5000/dvwa/login.php` (via the WAF). The correct password for gordonb is `abc123`, which appears at position 10 in RockYou.
+**Note:** Retrieve your `PHPSESSID` from `http://10.0.0.1:5000/dvwa/login.php` (HTTP, port 5000). The correct password for gordonb is `abc123`, which appears at position 10 in RockYou.
 
 **Expected result:** Account locked after 5 failed attempts. `abc123` at attempt 10 is blocked by the WAF lockout — Hydra finds **0 valid credentials**. Dashboard shows 1 Lockout Event.
 
