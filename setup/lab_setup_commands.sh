@@ -118,20 +118,30 @@ pip install -r requirement.txt --break-system-packages
 # The file is in the repo root — adjust path as needed
 cp waf_proxy.py ~/waf_proxy.py
 
-# 4.3 Start the WAF proxy (runs on 0.0.0.0:5000, forwards to 10.0.0.2)
+# 4.3 Start the WAF proxy — default HTTP mode (USE_TLS = False)
+# Listens on http://10.0.0.1:5000 — use this port for all Hydra demos below
 # Keep this terminal open — the WAF must stay running during all CW2 demos
 python3 ~/waf_proxy.py
 
+# 4.3a [OPTIONAL — Layer 7 TLS demo only]
+# To run in HTTPS mode, first edit waf_proxy.py and set USE_TLS = True, then:
+#   python3 ~/waf_proxy.py
+# Listens on https://10.0.0.1:5443 (different port, HTTPS only)
+# Accept the self-signed certificate warning in the browser.
+# Switch back to USE_TLS = False before running Hydra (steps 4.6).
+
 # 4.4 Verify WAF is running — open in browser on Kali
-# http://10.0.0.1:5000/waf/dashboard
+# HTTP mode (default): http://10.0.0.1:5000/waf/dashboard
+# TLS mode (optional): https://10.0.0.1:5443/waf/dashboard
 # You should see the live security dashboard with all counters at 0
 
-# 4.5 Get a valid DVWA session cookie via the WAF
+# 4.5 Get a valid DVWA session cookie via the WAF (HTTP mode)
 # Open Firefox on Kali → http://10.0.0.1:5000/dvwa/login.php → login as admin/password
 # Open Inspector (F12) → Storage → Cookies → copy PHPSESSID value
 # Set security level to Low via: http://10.0.0.1:5000/dvwa/security.php
 
-# 4.6 Hydra brute force — CW2 (attack routed through WAF, targeting gordonb)
+# 4.6 Hydra brute force — CW2 (attack routed through WAF on HTTP port 5000)
+# WAF must be running in HTTP mode (USE_TLS = False) for this step
 # Replace <YOUR_PHPSESSID> with the value copied from step 4.5
 hydra -l gordonb -P /usr/share/wordlists/rockyou.txt 10.0.0.1 -s 5000 http-get-form "/dvwa/vulnerabilities/brute/:username=^USER^&password=^PASS^&Login=Login:H=Cookie:PHPSESSID=<YOUR_PHPSESSID>;security=low:F=Username and/or password incorrect." -t 1 -V -f
 # Expected result: 0 valid passwords found — gordonb locked after 5 failures,
@@ -139,11 +149,13 @@ hydra -l gordonb -P /usr/share/wordlists/rockyou.txt 10.0.0.1 -s 5000 http-get-f
 # Dashboard shows: 1 Lockout Event, 8 Failed Logins, 7 Rate Limited.
 
 # 4.7 Inspect the audit log — verify pseudonymised IP and event types
-grep "ACCOUNT_LOCKED" ~/waf_audit.log
-grep "SQLI_BLOCKED" ~/waf_audit.log
-grep "RATE_LIMITED" ~/waf_audit.log
+# Log is AES-256-GCM encrypted by default; use --decrypt to read it:
+python3 ~/waf_proxy.py --decrypt | grep "ACCOUNT_LOCKED"
+python3 ~/waf_proxy.py --decrypt | grep "SQLI_BLOCKED"
+python3 ~/waf_proxy.py --decrypt | grep "RATE_LIMITED"
 
 # 4.8 Reset WAF state between demo runs (via dashboard or curl)
-# Open browser → http://10.0.0.1:5000/waf/dashboard → click "Reset Stats & State"
-# Or via terminal:
+# HTTP mode:  http://10.0.0.1:5000/waf/dashboard → click "Reset Stats & State"
+# TLS mode:   https://10.0.0.1:5443/waf/dashboard → click "Reset Stats & State"
+# Or via terminal (HTTP mode):
 curl -X POST http://10.0.0.1:5000/waf/reset
