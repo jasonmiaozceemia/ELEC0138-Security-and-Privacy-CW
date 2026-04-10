@@ -1,31 +1,66 @@
-[2026-04-06 22:40:21] [INFO] WAF proxy starting — listening on 0.0.0.0:5000 → forwarding to http://10.0.0.2
-[2026-04-06 22:40:21] [INFO] Config: lockout=5 failures/60s | rate_limit=20 req/30s
-[2026-04-06 22:40:21] [INFO] Dashboard: http://10.0.0.1:5000/waf/dashboard
-[2026-04-06 22:46:13] [INFO] WAF state reset via dashboard
-[2026-04-06 22:47:14] [ALERT] SQLI_BLOCKED ip=ip-f5047344122f path=/dvwa/vulnerabilities/sqli/ payload="id=1' OR '1'='1"
-[2026-04-06 22:47:58] [ALERT] SQLI_BLOCKED ip=ip-f5047344122f path=/dvwa/vulnerabilities/sqli/ payload="id=1' UNION SELECT user, password FROM users #"
-[2026-04-06 22:49:25] [WARN] LOGIN_FAIL username=admin ip=ip-f5047344122f attempt=1/5
-[2026-04-06 22:49:25] [WARN] LOGIN_FAIL username=admin ip=ip-f5047344122f attempt=2/5
-[2026-04-06 22:49:25] [WARN] LOGIN_FAIL username=admin ip=ip-f5047344122f attempt=3/5
-[2026-04-06 22:49:25] [INFO] LOGIN_OK username=admin ip=ip-f5047344122f
-[2026-04-06 22:50:44] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=1/5
-[2026-04-06 22:50:44] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=2/5
-[2026-04-06 22:50:45] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=3/5
-[2026-04-06 22:50:45] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=4/5
-[2026-04-06 22:50:45] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=5/5
-[2026-04-06 22:50:45] [ALERT] ACCOUNT_LOCKED username=gordonb ip=ip-f5047344122f duration=60s
-[2026-04-06 22:50:45] [WARN] LOGIN_BLOCKED username=gordonb ip=ip-f5047344122f remaining=59s
-[2026-04-06 22:50:45] [WARN] LOGIN_BLOCKED username=gordonb ip=ip-f5047344122f remaining=59s
-[2026-04-06 22:50:46] [WARN] LOGIN_BLOCKED username=gordonb ip=ip-f5047344122f remaining=59s
-[2026-04-06 22:50:46] [WARN] LOGIN_BLOCKED username=gordonb ip=ip-f5047344122f remaining=59s
-[2026-04-06 22:50:46] [WARN] LOGIN_BLOCKED username=gordonb ip=ip-f5047344122f remaining=58s
-[2026-04-06 22:50:46] [WARN] RATE_LIMITED ip=ip-f5047344122f path=/dvwa/vulnerabilities/brute/
-[2026-04-06 22:50:46] [WARN] RATE_LIMITED ip=ip-f5047344122f path=/dvwa/vulnerabilities/brute/
-[2026-04-06 22:50:46] [WARN] RATE_LIMITED ip=ip-f5047344122f path=/dvwa/vulnerabilities/brute/
-[2026-04-06 22:50:47] [WARN] RATE_LIMITED ip=ip-f5047344122f path=/dvwa/vulnerabilities/brute/
-[2026-04-06 22:50:47] [WARN] RATE_LIMITED ip=ip-f5047344122f path=/dvwa/vulnerabilities/brute/
-[2026-04-06 22:50:47] [WARN] RATE_LIMITED ip=ip-f5047344122f path=/dvwa/vulnerabilities/brute/
-[2026-04-06 22:50:47] [WARN] RATE_LIMITED ip=ip-f5047344122f path=/dvwa/vulnerabilities/brute/
-[2026-04-06 23:01:19] [INFO] WAF proxy starting on 0.0.0.0:5000 -> http://10.0.0.2
-[2026-04-06 23:01:19] [INFO] Config: lockout=5/60s | rate_limit=20/30s | dedup=2.0s
-[2026-04-06 23:01:19] [INFO] Dashboard: http://10.0.0.1:5000/waf/dashboard
+aFJRpyTwhe930mC7CeYrg4Bhm059ocbPnPyROcaiJWxuyxRgD243KTIwBg8H2EzF1/bcYlalc3R0Dyb2rjmt2qfLONRTNT
+NShORZ2SMsW1DrsCknhpyAaga7ovmzbHVx8bft+MGgMrKgh+MGAs5848fxDHyvw=
+//ROr901n5+d5LTSibsnASKpACeVteawtPLim9kLdIJUnMjO7FEGXURKwuSz5/UQa8GrewOLVMZa/Mv7NbSYIT/BLIFLFL
+MFnGc7bPLoSKwHBfHcEVnyxi5L+GgVtarJuyz9RTp/HpbETBem4nyB9bo97A=
+S9vO7qveAbSUSmO1yaQeaYC6tz9NRPGeEGKjee66/nNfwdaf7vlJaTXT9CcwHW/C9yxOW8CXNg7PPotJpBquUnUegLaeeUm0j/
+de6ZZ75by9P6wauCNyv93/hZPirxbFFaLzPyjIKPWTkKh9121jph9w8ytJ5ejw=
+FSuqvyaSSQ6wfSeHNXyoPcza2D5GtkTfOpqx3wZ+OLf9U/auruPKor6nkoMShyYywta7V75Mb2pL/TaLwUFli2jLxGiIo21x
+AepTftJDetwhUUVUUSsSByYN17s5d56KL7c79A1539pFw2ZJBnjHmhP2TP26qmg=
+TL+OMzts/SVimILVw95u62eLHtVlILx9a7K71TqZgpSLxv6+HaPLbArUKBYXLVdXlopgedwkzDjS930HCUWJXSxXMOeATIN
+LwNLrkK3rIN9fxXsGCTKXcsHn2yCHyA/2zyKOHSAerEy7bnP1F1isaut+6ypdDA=
+v4LoV5JAGugm4FsPnTc9ESdAz608VO7AEeBewZexyzt7hOSRRZHX+/3aAkPudswxYNEREHMbjNSLyqgSovZ12ueyCPqB7My
+Rf6zZEWyMIS11/AnL7M4go0X+vNc1VPiMRnBipxcjQb1LETKKFoxSDbEo/aTSv5phJIDGpqbRONLHK4phzZxyrds4voOF4=
+I7pQFBe9cDprnfiznk57uGIgalv2b4izkGneaQglshQ6ywzyyUBxNAUMYazeogSnSIU7YhetzW7OcLppOQ9npU2bMaZJooIM
+SnkY5fNFbgs/a7BqdsLhbiyQt+toVzG+4Hs15zMZ6UzMIRWSJZkaEFcYamSubrLaLbAta
+LavxKvYbYcp0jJ9fpfqsfuGOGpRLYiNeagulnZWPYbLygAPYoLo4yQxH6wOrNmtIxnNjOSssysYL74juINxxZVmaLMYsu6+
+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

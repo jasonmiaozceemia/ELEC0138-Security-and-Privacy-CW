@@ -12,7 +12,7 @@ This repository contains all code, data, and setup documentation for **CW1** (Th
 
 ```
 ├── waf_proxy.py              # CW2 — Flask WAF reverse proxy (runs on Kali)
-├── requirement.txt           # Python dependencies (Flask, requests)
+├── requirement.txt           # Python dependencies (Flask, requests, cryptography)
 ├── data/
 │   └── waf_audit.log         # Sample WAF audit log from the defence demo
 ├── figures/                  # Screenshots from CW1 and CW2 lab runs
@@ -102,7 +102,17 @@ hydra -l admin -P /usr/share/wordlists/rockyou.txt 10.0.0.2 http-get-form "/dvwa
 
 ## CW2 — Flask WAF Reverse Proxy Defence
 
-The WAF (`waf_proxy.py`) runs on the Kali machine at port 5000 and sits between the attacker and DVWA, implementing five defence layers: SQL injection IPS, account lockout, IP rate limiting, audit logging with live dashboard, and IP pseudonymisation.
+The WAF (`waf_proxy.py`) runs on the Kali machine at port 5000 and sits between the attacker and DVWA, implementing seven sequential defence layers:
+
+| Layer | Name | Mechanism |
+|---|---|---|
+| 1 | IPS | SQL injection regex filter (CWE-89) |
+| 2 | Lockout | Account lockout with exponential backoff (60s → 120s → 240s, cap 1h) |
+| 3 | Rate Limit | IP sliding-window rate limit (20 req / 30 s) |
+| 4 | Dashboard | Timestamped audit log + real-time web dashboard |
+| 5 | Privacy | SHA-256 IP pseudonymisation in all log entries |
+| 6 | Log Enc. | AES-256-GCM per-line log encryption at rest |
+| 7 | TLS | HTTPS with auto-generated RSA-2048 self-signed certificate |
 
 **Architecture:**
 ```
@@ -120,6 +130,14 @@ pip install -r requirement.txt --break-system-packages
 ```bash
 python3 waf_proxy.py
 ```
+
+**Read encrypted audit log (Layer 6):**
+```bash
+python3 waf_proxy.py --decrypt
+```
+
+**Enable HTTPS/TLS mode (Layer 7):**
+Set `USE_TLS = True` in `waf_proxy.py`, then access via `https://10.0.0.1:5443`.
 
 ### Brute Force — Hydra against WAF (CW2 defence demo)
 

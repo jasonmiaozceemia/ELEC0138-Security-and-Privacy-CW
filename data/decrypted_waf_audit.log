@@ -1,0 +1,37 @@
+[Decrypting waf_audit.log with key from waf_audit.key]
+
+[2026-04-09 22:25:00] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=1/5
+[2026-04-09 22:25:00] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=2/5
+[2026-04-09 22:25:00] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=3/5
+[2026-04-09 22:25:01] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=4/5
+[2026-04-09 22:25:01] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=5/5
+[2026-04-09 22:25:01] [ALERT] ACCOUNT_LOCKED username=gordonb ip=ip-f5047344122f duration=60s
+lockout_count=1
+[2026-04-09 22:25:01] [WARN] LOGIN_BLOCKED username=gordonb ip=ip-f5047344122f remaining=59s
+[2026-04-09 22:25:01] [WARN] LOGIN_BLOCKED username=gordonb ip=ip-f5047344122f remaining=59s
+[2026-04-09 22:25:02] [WARN] LOGIN_BLOCKED username=gordonb ip=ip-f5047344122f remaining=59s
+[2026-04-09 22:25:02] [WARN] LOGIN_BLOCKED username=gordonb ip=ip-f5047344122f remaining=59s
+[2026-04-09 22:25:02] [WARN] LOGIN_BLOCKED username=gordonb ip=ip-f5047344122f remaining=58s
+[2026-04-09 22:25:02] [WARN] RATE_LIMITED ip=ip-f5047344122f path=/dvwa/vulnerabilities/brute/
+[2026-04-09 22:25:02] [WARN] RATE_LIMITED ip=ip-f5047344122f path=/dvwa/vulnerabilities/brute/
+[2026-04-09 22:25:02] [WARN] RATE_LIMITED ip=ip-f5047344122f path=/dvwa/vulnerabilities/brute/
+[2026-04-09 22:25:03] [WARN] RATE_LIMITED ip=ip-f5047344122f path=/dvwa/vulnerabilities/brute/
+[2026-04-09 22:25:03] [WARN] RATE_LIMITED ip=ip-f5047344122f path=/dvwa/vulnerabilities/brute/
+[2026-04-09 22:26:18] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=1/5
+[2026-04-09 22:26:18] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=2/5
+[2026-04-09 22:26:18] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=3/5
+[2026-04-09 22:26:18] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=4/5
+[2026-04-09 22:26:19] [WARN] LOGIN_FAIL username=gordonb ip=ip-f5047344122f attempt=5/5
+[2026-04-09 22:26:19] [ALERT] ACCOUNT_LOCKED username=gordonb ip=ip-f5047344122f duration=120s
+lockout_count=2
+[2026-04-09 22:26:19] [WARN] LOGIN_BLOCKED username=gordonb ip=ip-f5047344122f remaining=119s
+[2026-04-09 22:26:19] [WARN] LOGIN_BLOCKED username=gordonb ip=ip-f5047344122f remaining=119s
+[2026-04-09 22:26:19] [WARN] LOGIN_BLOCKED username=gordonb ip=ip-f5047344122f remaining=119s
+[2026-04-09 22:26:20] [WARN] LOGIN_BLOCKED username=gordonb ip=ip-f5047344122f remaining=119s
+[2026-04-09 22:26:20] [WARN] LOGIN_BLOCKED username=gordonb ip=ip-f5047344122f remaining=118s
+[2026-04-09 22:26:20] [WARN] RATE_LIMITED ip=ip-f5047344122f path=/dvwa/vulnerabilities/brute/
+[2026-04-09 22:26:20] [WARN] RATE_LIMITED ip=ip-f5047344122f path=/dvwa/vulnerabilities/brute/
+[2026-04-09 22:26:20] [WARN] RATE_LIMITED ip=ip-f5047344122f path=/dvwa/vulnerabilities/brute/
+[2026-04-09 22:26:20] [WARN] RATE_LIMITED ip=ip-f5047344122f path=/dvwa/vulnerabilities/brute/
+[2026-04-09 22:26:20] [WARN] RATE_LIMITED ip=ip-f5047344122f path=/dvwa/vulnerabilities/brute/
+[2026-04-09 22:26:21] [WARN] RATE_LIMITED ip=ip-f5047344122f path=/dvwa/vulnerabilities/brute/

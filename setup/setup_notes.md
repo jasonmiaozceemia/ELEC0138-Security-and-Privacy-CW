@@ -75,4 +75,26 @@ Install using the provided `requirement.txt`:
 pip install -r requirement.txt --break-system-packages
 ```
 
-Required packages: `Flask>=3.0`, `requests>=2.31`
+Required packages: `Flask>=3.0`, `requests>=2.31`, `cryptography>=42.0`
+
+---
+
+### 7. Reading the encrypted audit log (Layer 6)
+By default `LOG_ENCRYPT = True`, so `waf_audit.log` contains base64-encoded AES-256-GCM ciphertext — opening it in a text editor will show unreadable output. To print decrypted entries to the terminal:
+
+```bash
+python3 ~/waf_proxy.py --decrypt
+```
+
+The AES key is stored in `waf_audit.key` in the same directory. Keep this file secret and do not commit it to version control.
+
+---
+
+### 8. Enabling HTTPS/TLS mode (Layer 7)
+By default `USE_TLS = False` and the WAF runs over plain HTTP on port 5000. To enable TLS:
+
+1. Open `waf_proxy.py` and set `USE_TLS = True`
+2. Restart the WAF — it will auto-generate `waf_cert.pem` and `waf_key.pem` on first run
+3. Access the WAF at `https://10.0.0.1:5443` (accept the self-signed certificate warning in the browser)
+
+To swap in a CA-signed certificate, replace `waf_cert.pem` and `waf_key.pem` with your own PEM files — no code changes required.
