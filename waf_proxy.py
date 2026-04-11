@@ -96,7 +96,7 @@ def write_log_line(line: str):
         nonce = os.urandom(12)                          # 96-bit nonce (NIST recommended)
         ct    = aes.encrypt(nonce, line.encode(), None) # None = no additional data
         encoded = base64.b64encode(nonce + ct).decode()
-        with open(LOG_FILE, "a") as f:
+        with open(LOG_FILE, "a", encoding="utf-8") as f:
             f.write(encoded + "\n")
     else:
         with open(LOG_FILE, "a", encoding="utf-8") as f:
@@ -112,8 +112,8 @@ def decrypt_log():
         print(f"Log file not found: {LOG_FILE}")
         return
     aes = AESGCM(LOG_KEY)
-    with open(LOG_FILE) as f:
-        for i, raw_line in enumerate(f, 1):
+    with open(LOG_FILE, encoding="utf-8") as f:
+        for raw_line in f:
             raw_line = raw_line.strip()
             if not raw_line:
                 continue
@@ -122,7 +122,7 @@ def decrypt_log():
                 nonce = raw[:12]
                 ct    = raw[12:]
                 print(aes.decrypt(nonce, ct, None).decode())
-            except Exception:
+            except (ValueError, KeyError, TypeError):
                 # Line was written in plain-text mode — print as-is
                 print(raw_line)
 
@@ -452,7 +452,7 @@ def forward_to_dvwa(target_url: str) -> Response:
                         if k.lower() not in STRIP_RESP_HEADERS]
         return Response(upstream.content, status=upstream.status_code, headers=resp_headers)
 
-    except Exception as e:
+    except (req_lib.RequestException, ConnectionError) as e:
         log("ERROR", f"UPSTREAM_ERROR error={e}")
         return build_block_page("WAF — 502 Bad Gateway", "Upstream DVWA server unreachable.", 502)
 
